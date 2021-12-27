@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins','Roboto', sans-serif;
+}
+
+:root{
+    --color-primary: #8A2BE2;
+    --color-secundary: #d3d3d3;
+    --color-white: #fff;
+    --color-tasks: #eeeeeefa;
+    --color-delete: #ff0000;
+}
+
+::selection{
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+main{
+    display: grid;
+    justify-content: center;
+    margin: 10% auto;
+    width: fit-content;
+    box-shadow: 2px 2px 5px 2px var(--color-secundary);
+    padding: 1rem;
+    border-radius: 3px;
+}
+
+form{
+    display: grid;
+    grid-template-columns: 85% 13%;
+    margin: 1rem 0;
+    gap: 0.5rem;
+}
+
+form input{
+    border: 1px solid var(--color-secundary);
+    border-radius: 3px;
+    padding: 5px 10px;
+    outline: none;
+    font-size: 1rem;
+}
+
+form input,button,.icon-trash{
+    transition: all 0.3s ease-in-out;
+}
+
+form input:focus{
+    border: 1px solid var(--color-primary);
+}
+
+.message-tasks input[type="checkbox"]{
+    accent-color: var(--color-primary);
+}
+
+.message-tasks input[type="checkbox"]:focus ~ p{
+    text-decoration: line-through;   
+}
+
+.message-tasks{
+    background-color: var(--color-tasks);
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+.line-infos{
+    justify-content: space-between;
+    margin: 1rem 0 0;
+}
+
+.message-tasks,.line-infos{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+button{
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+button,.icon-trash:hover{
+    cursor: pointer;
+}
+
+.icon-trash{
+    font-size: 0.8rem;
+}
+
+.icon-trash:hover{
+    color: var(--color-delete);
+}
