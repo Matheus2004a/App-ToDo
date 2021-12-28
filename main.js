@@ -5,11 +5,11 @@ form.addEventListener("submit", event => {
 })
 
 // Id para posteriormente excluir a tarefa
-function idGenerator() {
+/* function idGenerator() {
     let timeCreateTask = new Date()
     let id = timeCreateTask.getHours() + timeCreateTask.getMinutes() + timeCreateTask.getSeconds() + timeCreateTask.getMilliseconds()
     return id
-}
+} */
 
 let listTasks = []
 
@@ -50,7 +50,20 @@ function createTask() {
     ul.appendChild(itemTask)
     taskType.value = ""
 
-    itemTask.classList.toggle("task")
+    input.addEventListener("change", () => {
+        itemTask.classList.toggle("done")
+    })
+
+    icon.addEventListener("click", () => {
+        itemTask.classList.add("delete")
+        removeOrFinishTask()
+    })
+
+    function removeOrFinishTask() {
+        listTasks.pop()
+        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
+    }
+
     messageTasks.appendChild(ul)
 }
 
