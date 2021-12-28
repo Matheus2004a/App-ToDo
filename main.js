@@ -4,13 +4,6 @@ form.addEventListener("submit", event => {
     checkTask()
 })
 
-// Id para posteriormente excluir a tarefa
-/* function idGenerator() {
-    let timeCreateTask = new Date()
-    let id = timeCreateTask.getHours() + timeCreateTask.getMinutes() + timeCreateTask.getSeconds() + timeCreateTask.getMilliseconds()
-    return id
-} */
-
 let listTasks = []
 
 const messageTasks = document.querySelector(".message-tasks")
@@ -33,38 +26,32 @@ function checkTask() {
 }
 
 function createTask() {
-    /* let task = {
-        id: idGenerator(),
-        description: taskType.value
-    } */
     let ul = document.querySelector("ul")
-    let itemTask = document.createElement("li")
-    let icon = document.createElement("i")
-    let input = document.createElement("input")
-    input.setAttribute("type", "checkbox")
-    icon.setAttribute("class", "fas fa-trash icon-trash")
+    let list = document.createElement("li")
+    list.innerHTML += `<input type='checkbox' class='check-task'> ${taskType.value} <i class="fas fa-trash icon-trash"></i>`
+    let checkTasks = document.querySelectorAll(".check-task")
+    let icons = document.querySelectorAll(".icon-trash")
+    ul.appendChild(list)
 
-    itemTask.appendChild(input)
-    itemTask.appendChild(document.createTextNode(taskType.value))
-    itemTask.appendChild(icon)
-    ul.appendChild(itemTask)
+    checkTasks.forEach(task => {
+        task.addEventListener("click", () => {
+            list.classList.toggle("done")
+        })
+        icons.forEach(icon => {
+            icon.addEventListener("click", () => {
+                list.classList.add("delete")
+                console.log(listTasks)
+            })
+        })
+    })
+
     taskType.value = ""
-
-    input.addEventListener("change", () => {
-        itemTask.classList.toggle("done")
-    })
-
-    icon.addEventListener("click", () => {
-        itemTask.classList.add("delete")
-        removeOrFinishTask()
-    })
 
     function removeOrFinishTask() {
         listTasks.pop()
+        list.classList.add("delete")
         totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
     }
-
-    messageTasks.appendChild(ul)
 }
 
 const buttonSendTask = document.querySelector(".btn-send-task")
