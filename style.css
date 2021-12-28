@@ -53,6 +53,10 @@ form input:focus{
     border: 1px solid var(--color-primary);
 }
 
+ul{
+    list-style: none;
+}
+
 .message-tasks input[type="checkbox"]{
     accent-color: var(--color-primary);
 }
@@ -61,22 +65,36 @@ form input:focus{
     text-decoration: line-through;   
 }
 
-.message-tasks{
+/* .message-tasks{
     background-color: var(--color-tasks);
     padding: 5px 10px;
     margin: 5px 0;
     border-radius: 3px;
-}
+} */
 
 .line-infos{
     justify-content: space-between;
     margin: 1rem 0 0;
 }
 
-.message-tasks,.line-infos{
+.message-tasks ul li,.line-infos{
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.message-tasks ul li{
+    align-items: center;
+    margin: 10px 0;
+}
+
+.message-tasks ul li{
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.message-tasks ul li.task{
+    background-color: var(--color-tasks);
 }
 
 button{

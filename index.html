@@ -12,32 +12,30 @@
         <h1>Todo App</h1>
         <div class="container">
             <form action="">
-                <input type="text" id="" placeholder="Adicione uma tarefa">
-                <button type="submit"><i class="fas fa-plus"></i></button>
+                <input type="text" id="task-type" placeholder="Adicione uma tarefa">
+                <button type="submit" class="btn-send-task"><i class="fas fa-plus"></i></button>
             </form>
     
             <div class="message-tasks">
-                <input type="checkbox" class="check-task">
-                <p>Lorem ipsum dolor sit amet.</p>
-                <span>
-                    <i class="fas fa-trash icon-trash"></i>
-                </span>
-            </div>
-            <div class="message-tasks">
-                <input type="checkbox" class="check-task">
-                <p>Lorem ipsum dolor sit amet.</p>
-                <span>
-                    <i class="fas fa-trash icon-trash"></i>
-                </span>
+                <ul>
+                    <!-- <li>
+                        <input type="checkbox" class="check-task">
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <span>
+                            <i class="fas fa-trash icon-trash"></i>
+                        </span>
+                    </li> -->
+                </ul>
             </div>
             
             <div class="line-infos">
-                <p>Você tem n tarefas pendentes</p>
+                <p class="total-tasks"></p>
                 <button type="submit">Limpar tudo</button>
             </div>
         </div>
     </main>
 
+    <script src="main.js"></script>
     <script src="https://kit.fontawesome.com/51dc1929bd.js" crossorigin="anonymous"></script>
 </body>
 </html>
