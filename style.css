@@ -13,7 +13,7 @@
     --color-white: #fff;
     --color-tasks: #eeeeeefa;
     --color-delete: #ff0000;
-    --color-done: 
+    --color-done: #adff2f;
 }
 
 ::selection{
@@ -46,7 +46,7 @@ form input{
     font-size: 1rem;
 }
 
-form input,button,.icon-trash{
+form input,.btn-send-task,.btn-clear-all-task,.icon-trash{
     transition: all 0.3s ease-in-out;
 }
 
@@ -61,17 +61,6 @@ ul{
 .message-tasks input[type="checkbox"]{
     accent-color: var(--color-primary);
 }
-
-/* .message-tasks input[type="checkbox"]:focus ~ ul li.done{
-    text-decoration: line-through;   
-} */
-
-/* .message-tasks{
-    background-color: var(--color-tasks);
-    padding: 5px 10px;
-    margin: 5px 0;
-    border-radius: 3px;
-} */
 
 .line-infos{
     justify-content: space-between;
@@ -99,36 +88,51 @@ ul{
     padding: 5px 10px;
 }
 
+.message-tasks ul input{
+    outline: none;
+}
+
+<<<<<<< HEAD
+ul li.delete{
+=======
+.message-tasks ul li button{
+    margin-left: auto;
+}
+
 .message-tasks ul li.done{
-    background-color: #adff2f;
+    background-color: var(--color-done);
     text-decoration: line-through;
 }
 
-ul li.delete{
+.message-tasks ul li.delete{
+>>>>>>> tasks
     display: none;
 }
 
 button{
     border: none;
+    background: transparent;
+}
+
+.btn-send-task,.btn-clear-all-task{
     padding: 10px;
     border-radius: 3px;
     background-color: var(--color-primary);
     color: var(--color-white);
 }
 
-button:hover{
+.btn-send-task:hover,.btn-clear-all-task:hover{
     opacity: 0.9;
 }
 
-button,.icon-trash:hover{
+.btn-send-task,.btn-clear-all-task,.icon-trash:hover{
     cursor: pointer;
 }
 
 .icon-trash{
     font-size: 0.8rem;
-    margin-left: auto;
 }
 
-.icon-trash:hover{
+button .icon-trash:hover{
     color: var(--color-delete);
 }

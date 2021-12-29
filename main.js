@@ -20,7 +20,7 @@ function checkTask() {
         listTasks.push(taskType.value)
         taskType.focus()
         createTask()
-        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
+        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
         console.log(listTasks)
     }
 }
@@ -51,6 +51,35 @@ function createTask() {
         listTasks.pop()
         list.classList.add("delete")
         totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
+    let itemTask = document.createElement("li")
+    let buttonDeleteTask = document.createElement("button")
+    let input = document.createElement("input")
+    input.setAttribute("type", "checkbox")
+    itemTask.innerHTML
+    buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
+
+    itemTask.appendChild(input)
+    itemTask.appendChild(document.createTextNode(taskType.value))
+    itemTask.appendChild(buttonDeleteTask)
+    ul.appendChild(itemTask)
+
+    taskType.value = ""
+
+    input.addEventListener("change", () => {
+        itemTask.classList.toggle("done")
+        if (input.checked) {
+            removeOrFinishTask()
+        }
+    })
+
+    buttonDeleteTask.addEventListener("click", () => {
+        itemTask.classList.add("delete")
+        removeOrFinishTask()
+    })
+
+    function removeOrFinishTask() {
+        listTasks.pop()
+        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
     }
 }
 
