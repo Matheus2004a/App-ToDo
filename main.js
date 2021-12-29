@@ -31,18 +31,21 @@ function createTask() {
     let buttonDeleteTask = document.createElement("button")
     let input = document.createElement("input")
     input.setAttribute("type", "checkbox")
+    itemTask.innerHTML
     buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
 
     itemTask.appendChild(input)
     itemTask.appendChild(document.createTextNode(taskType.value))
     itemTask.appendChild(buttonDeleteTask)
     ul.appendChild(itemTask)
-    
+
     taskType.value = ""
 
     input.addEventListener("change", () => {
         itemTask.classList.toggle("done")
-        removeOrFinishTask()
+        if (input.checked) {
+            removeOrFinishTask()
+        }
     })
 
     buttonDeleteTask.addEventListener("click", () => {

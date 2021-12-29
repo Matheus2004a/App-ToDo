@@ -88,6 +88,10 @@ ul{
     padding: 5px 10px;
 }
 
+.message-tasks ul input{
+    outline: none;
+}
+
 .message-tasks ul li button{
     margin-left: auto;
 }
