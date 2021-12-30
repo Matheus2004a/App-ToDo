@@ -6,14 +6,22 @@ form.addEventListener("submit", event => {
 
 let listTasks = []
 
-const messageTasks = document.querySelector(".message-tasks")
+function taskInList(task, list) {
+    if (list.indexOf(task) !== -1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+/* const messageTasks = document.querySelector(".message-tasks") */
 const taskType = document.querySelector("#task-type")
 let totalTasks = document.querySelector(".total-tasks")
 let messageError = document.createElement("p")
 
 function checkTask() {
-    if (taskType.value === "") {
-        messageError.innerHTML = "<font color='#ff0000'>Digite uma tarefa</font>"
+    if (taskType.value === "" || taskInList(taskType.value, listTasks)) {
+        messageError.innerHTML = "<font color='#ff0000'>Digite uma tarefa / Você já possui essa tarefa</font>"
         form.appendChild(messageError)
     } else {
         messageError.innerHTML = ""
@@ -27,35 +35,10 @@ function checkTask() {
 
 function createTask() {
     let ul = document.querySelector("ul")
-    let list = document.createElement("li")
-    list.innerHTML += `<input type='checkbox' class='check-task'> ${taskType.value} <i class="fas fa-trash icon-trash"></i>`
-    let checkTasks = document.querySelectorAll(".check-task")
-    let icons = document.querySelectorAll(".icon-trash")
-    ul.appendChild(list)
-
-    checkTasks.forEach(task => {
-        task.addEventListener("click", () => {
-            list.classList.toggle("done")
-        })
-        icons.forEach(icon => {
-            icon.addEventListener("click", () => {
-                list.classList.add("delete")
-                console.log(listTasks)
-            })
-        })
-    })
-
-    taskType.value = ""
-
-    function removeOrFinishTask() {
-        listTasks.pop()
-        list.classList.add("delete")
-        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
     let itemTask = document.createElement("li")
     let buttonDeleteTask = document.createElement("button")
     let input = document.createElement("input")
     input.setAttribute("type", "checkbox")
-    itemTask.innerHTML
     buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
 
     itemTask.appendChild(input)
@@ -79,9 +62,9 @@ function createTask() {
 
     function removeOrFinishTask() {
         listTasks.pop()
-        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
+        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
     }
-}
 
-const buttonSendTask = document.querySelector(".btn-send-task")
-buttonSendTask.addEventListener("click", checkTask)
+    const buttonSendTask = document.querySelector(".btn-send-task")
+    buttonSendTask.addEventListener("click", checkTask)
+}

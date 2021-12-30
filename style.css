@@ -56,6 +56,7 @@ form input:focus{
 
 ul{
     list-style: none;
+    min-width: 30%;
 }
 
 .message-tasks input[type="checkbox"]{
@@ -76,25 +77,16 @@ ul{
 .message-tasks ul li{
     align-items: center;
     margin: 10px 0;
-}
-
-.message-tasks ul li{
     border-radius: 3px;
     padding: 5px;
-}
-
-.message-tasks ul li{
     background-color: var(--color-tasks);
     padding: 5px 10px;
 }
 
-.message-tasks ul input{
+.message-tasks ul li input{
     outline: none;
 }
 
-<<<<<<< HEAD
-ul li.delete{
-=======
 .message-tasks ul li button{
     margin-left: auto;
 }
@@ -105,7 +97,6 @@ ul li.delete{
 }
 
 .message-tasks ul li.delete{
->>>>>>> tasks
     display: none;
 }
 
@@ -127,10 +118,6 @@ button{
 
 .btn-send-task,.btn-clear-all-task,.icon-trash:hover{
     cursor: pointer;
-}
-
-.icon-trash{
-    font-size: 0.8rem;
 }
 
 button .icon-trash:hover{
