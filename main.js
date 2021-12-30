@@ -14,14 +14,13 @@ function taskInList(task, list) {
     }
 }
 
-/* const messageTasks = document.querySelector(".message-tasks") */
 const taskType = document.querySelector("#task-type")
 let totalTasks = document.querySelector(".total-tasks")
 let messageError = document.createElement("p")
 
 function checkTask() {
     if (taskType.value === "" || taskInList(taskType.value, listTasks)) {
-        messageError.innerHTML = "<font color='#ff0000'>Digite uma tarefa / Você já possui essa tarefa</font>"
+        messageError.innerHTML = "<font color='#ff0000'>Tarefa inválida ou já cadastrada na lista</font>"
         form.appendChild(messageError)
     } else {
         messageError.innerHTML = ""
@@ -29,8 +28,9 @@ function checkTask() {
         taskType.focus()
         createTask()
         totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
-        console.log(listTasks)
     }
+    taskType.value = ""
+    console.log(listTasks)
 }
 
 function createTask() {
@@ -45,8 +45,6 @@ function createTask() {
     itemTask.appendChild(document.createTextNode(taskType.value))
     itemTask.appendChild(buttonDeleteTask)
     ul.appendChild(itemTask)
-
-    taskType.value = ""
 
     input.addEventListener("change", () => {
         itemTask.classList.toggle("done")
