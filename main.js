@@ -66,7 +66,10 @@ function checkTask() {
         })
 
         function removeTask() {
-            listTasks.pop()
+            let removeTaskSpecific = listTasks.indexOf(taskType.value)
+            if (removeTaskSpecific !== -1) {
+                listTasks.splice(removeTaskSpecific, 1)
+            }
         }
     }
 }
