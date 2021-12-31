@@ -96,10 +96,6 @@ ul{
     text-decoration: line-through;
 }
 
-.message-tasks ul li.delete{
-    display: none;
-}
-
 button{
     border: none;
     background: transparent;

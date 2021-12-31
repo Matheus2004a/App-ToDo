@@ -8,16 +8,16 @@ buttonSendTask.addEventListener("click", checkTask)
 
 let listTasks = []
 
-function idGenerator() {
-    let timeStamp = new Date()
-    let id = timeStamp.getHours().toString() + timeStamp.getMinutes().toString() + timeStamp.getSeconds().toString() + timeStamp.getMilliseconds().toString()
+const buttonClearAllTask = document.querySelector(".btn-clear-all-task")
+buttonClearAllTask.addEventListener("click", () => {
+    listTasks.length = 0
+    const AllLi = document.querySelectorAll("li")
+    AllLi.forEach(element => {
+        element.style.display = "none"
+    })
+})
 
-    return id
-}
-
-let taskInfo = {
-    id: idGenerator()
-}
+let ul = document.querySelector("ul")
 
 function taskInList(task, list) {
     if (list.indexOf(task) !== -1) {
@@ -40,12 +40,10 @@ function checkTask() {
         taskType.focus()
         createTask()
         console.log(listTasks)
-        console.log(taskInfo)
     }
     taskType.value = ""
 
     function createTask() {
-        let ul = document.querySelector("ul")
         let itemTask = document.createElement("li")
         let buttonDeleteTask = document.createElement("button")
         let input = document.createElement("input")
@@ -63,7 +61,7 @@ function checkTask() {
         })
 
         buttonDeleteTask.addEventListener("click", () => {
-            itemTask.classList.add("delete")
+            itemTask.style.display = "none"
             removeTask()
         })
 
