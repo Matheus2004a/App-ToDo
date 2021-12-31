@@ -15,6 +15,10 @@ function idGenerator() {
     return id
 }
 
+let taskInfo = {
+    id: idGenerator()
+}
+
 function taskInList(task, list) {
     if (list.indexOf(task) !== -1) {
         return true
@@ -24,7 +28,6 @@ function taskInList(task, list) {
 }
 
 const taskType = document.querySelector("#task-type")
-let totalTasks = document.querySelector(".total-tasks")
 let messageError = document.createElement("p")
 
 function checkTask() {
@@ -36,14 +39,13 @@ function checkTask() {
         listTasks.push(taskType.value)
         taskType.focus()
         createTask()
-        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
         console.log(listTasks)
+        console.log(taskInfo)
     }
     taskType.value = ""
 
     function createTask() {
         let ul = document.querySelector("ul")
-
         let itemTask = document.createElement("li")
         let buttonDeleteTask = document.createElement("button")
         let input = document.createElement("input")
@@ -57,17 +59,16 @@ function checkTask() {
 
         input.addEventListener("change", () => {
             itemTask.classList.toggle("done")
-            removeOrFinishTask()
+            removeTask()
         })
 
         buttonDeleteTask.addEventListener("click", () => {
             itemTask.classList.add("delete")
-            removeOrFinishTask()
+            removeTask()
         })
 
-        function removeOrFinishTask() {
+        function removeTask() {
             listTasks.pop()
-            totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
         }
     }
 }

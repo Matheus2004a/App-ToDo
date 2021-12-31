@@ -9,7 +9,7 @@
 
 :root{
     --color-primary: #8A2BE2;
-    --color-secundary: #d3d3d3;
+    --color-secondary: #d3d3d3;
     --color-white: #fff;
     --color-tasks: #eeeeeefa;
     --color-delete: #ff0000;
@@ -26,7 +26,7 @@ main{
     margin: 10% auto;
     width: 40%;
     min-width: fit-content;
-    box-shadow: 2px 2px 5px 2px var(--color-secundary);
+    box-shadow: 2px 2px 5px 2px var(--color-secondary);
     padding: 1rem;
     border-radius: 3px;
 }
@@ -39,7 +39,7 @@ form{
 }
 
 form input{
-    border: 1px solid var(--color-secundary);
+    border: 1px solid var(--color-secondary);
     border-radius: 3px;
     padding: 5px 10px;
     outline: none;
