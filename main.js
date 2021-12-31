@@ -8,12 +8,23 @@ buttonSendTask.addEventListener("click", checkTask)
 
 let listTasks = []
 
+
 function idGenerator() {
     let timeStamp = new Date()
     let id = timeStamp.getHours().toString() + timeStamp.getMinutes().toString() + timeStamp.getSeconds().toString() + timeStamp.getMilliseconds().toString()
 
     return id
 }
+const buttonClearAllTask = document.querySelector(".btn-clear-all-task")
+buttonClearAllTask.addEventListener("click", () => {
+    listTasks.length = 0
+    const AllLi = document.querySelectorAll("li")
+    AllLi.forEach(element => {
+        element.style.display = "none"
+    })
+})
+
+let ul = document.querySelector("ul")
 
 function taskInList(task, list) {
     if (list.indexOf(task) !== -1) {
@@ -24,7 +35,6 @@ function taskInList(task, list) {
 }
 
 const taskType = document.querySelector("#task-type")
-let totalTasks = document.querySelector(".total-tasks")
 let messageError = document.createElement("p")
 
 function checkTask() {
@@ -68,6 +78,33 @@ function checkTask() {
         function removeOrFinishTask() {
             listTasks.pop()
             totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
+            let itemTask = document.createElement("li")
+            let buttonDeleteTask = document.createElement("button")
+            let input = document.createElement("input")
+            input.setAttribute("type", "checkbox")
+            buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
+
+            itemTask.appendChild(input)
+            itemTask.appendChild(document.createTextNode(taskType.value))
+            itemTask.appendChild(buttonDeleteTask)
+            ul.appendChild(itemTask)
+
+            input.addEventListener("change", () => {
+                itemTask.classList.toggle("done")
+                removeTask()
+            })
+
+            buttonDeleteTask.addEventListener("click", () => {
+                itemTask.style.display = "none"
+                removeTask()
+            })
+
+            function removeTask() {
+                let removeTaskSpecific = listTasks.indexOf(taskType.value)
+                if (removeTaskSpecific !== -1) {
+                    listTasks.splice(removeTaskSpecific, 1)
+                }
+            }
         }
     }
 }
