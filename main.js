@@ -8,16 +8,10 @@ buttonSendTask.addEventListener("click", checkTask)
 
 let listTasks = []
 
-function idGenerator() {
-    let timeStamp = new Date()
-    let id = timeStamp.getHours().toString() + timeStamp.getMinutes().toString() + timeStamp.getSeconds().toString() + timeStamp.getMilliseconds().toString()
-
-    return id
-}
-
 const buttonClearAllTask = document.querySelector(".btn-clear-all-task")
 buttonClearAllTask.addEventListener("click", () => {
     listTasks.length = 0
+    removeErrorTask()
     const AllLi = document.querySelectorAll("li")
     AllLi.forEach(element => {
         element.style.display = "none"
@@ -47,7 +41,7 @@ function checkTask() {
         messageError.innerHTML = "<font color='#ff0000'>Tarefa inválida ou já cadastrada na lista</font>"
         form.appendChild(messageError)
     } else {
-        messageError.innerHTML = ""
+        removeErrorTask()
         listTasks.push(taskType.value)
         focusInputTask()
         createTask()
@@ -83,4 +77,8 @@ function checkTask() {
             listTasks.splice(removeTaskSpecific, 1)
         }
     }
+}
+
+function removeErrorTask() {
+    messageError.innerHTML = ""
 }
