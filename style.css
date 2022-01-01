@@ -64,11 +64,10 @@ ul{
 }
 
 .line-infos{
-    justify-content: space-between;
     margin: 1rem 0 0;
 }
 
-.message-tasks ul li,.line-infos{
+.message-tasks ul li{
     display: flex;
     align-items: center;
     gap: 0.5rem;

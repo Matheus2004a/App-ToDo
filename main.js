@@ -8,13 +8,13 @@ buttonSendTask.addEventListener("click", checkTask)
 
 let listTasks = []
 
-
 function idGenerator() {
     let timeStamp = new Date()
     let id = timeStamp.getHours().toString() + timeStamp.getMinutes().toString() + timeStamp.getSeconds().toString() + timeStamp.getMilliseconds().toString()
 
     return id
 }
+
 const buttonClearAllTask = document.querySelector(".btn-clear-all-task")
 buttonClearAllTask.addEventListener("click", () => {
     listTasks.length = 0
@@ -34,7 +34,12 @@ function taskInList(task, list) {
     }
 }
 
+function focusInputTask() {
+    taskType.focus()
+}
+
 const taskType = document.querySelector("#task-type")
+focusInputTask()
 let messageError = document.createElement("p")
 
 function checkTask() {
@@ -44,16 +49,12 @@ function checkTask() {
     } else {
         messageError.innerHTML = ""
         listTasks.push(taskType.value)
-        taskType.focus()
+        focusInputTask()
         createTask()
-        totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendente(s)`
-        console.log(listTasks)
     }
     taskType.value = ""
 
     function createTask() {
-        let ul = document.querySelector("ul")
-
         let itemTask = document.createElement("li")
         let buttonDeleteTask = document.createElement("button")
         let input = document.createElement("input")
@@ -66,45 +67,20 @@ function checkTask() {
         ul.appendChild(itemTask)
 
         input.addEventListener("change", () => {
+            removeTask()
             itemTask.classList.toggle("done")
-            removeOrFinishTask()
+            focusInputTask()
         })
 
         buttonDeleteTask.addEventListener("click", () => {
-            itemTask.classList.add("delete")
-            removeOrFinishTask()
+            removeTask()
+            itemTask.style.display = "none"
+            focusInputTask()
         })
 
-        function removeOrFinishTask() {
-            listTasks.pop()
-            totalTasks.innerHTML = `Você tem ${listTasks.length} tarefa(s) pendentes`
-            let itemTask = document.createElement("li")
-            let buttonDeleteTask = document.createElement("button")
-            let input = document.createElement("input")
-            input.setAttribute("type", "checkbox")
-            buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
-
-            itemTask.appendChild(input)
-            itemTask.appendChild(document.createTextNode(taskType.value))
-            itemTask.appendChild(buttonDeleteTask)
-            ul.appendChild(itemTask)
-
-            input.addEventListener("change", () => {
-                itemTask.classList.toggle("done")
-                removeTask()
-            })
-
-            buttonDeleteTask.addEventListener("click", () => {
-                itemTask.style.display = "none"
-                removeTask()
-            })
-
-            function removeTask() {
-                let removeTaskSpecific = listTasks.indexOf(taskType.value)
-                if (removeTaskSpecific !== -1) {
-                    listTasks.splice(removeTaskSpecific, 1)
-                }
-            }
+        function removeTask() {
+            let removeTaskSpecific = listTasks.indexOf(itemTask.value)
+            listTasks.splice(removeTaskSpecific, 1)
         }
     }
 }
