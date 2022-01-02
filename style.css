@@ -75,11 +75,11 @@ ul{
 
 .message-tasks ul li{
     align-items: center;
-    margin: 10px 0;
+    margin: 15px 0;
     border-radius: 3px;
-    padding: 5px;
     background-color: var(--color-tasks);
-    padding: 5px 10px;
+    box-shadow: 1px 1px 3px 1px var(--color-secondary);
+    padding: 10px;
 }
 
 .message-tasks ul li input{
