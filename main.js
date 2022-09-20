@@ -4,76 +4,70 @@ form.addEventListener("submit", event => {
 })
 
 const buttonSendTask = document.querySelector(".btn-send-task")
-buttonSendTask.addEventListener("click", checkTask)
+buttonSendTask.onclick = () => checkTask()
 
 let listTasks = []
 
 const buttonClearAllTask = document.querySelector(".btn-clear-all-task")
-buttonClearAllTask.addEventListener("click", () => {
+buttonClearAllTask.onclick = () => {
     listTasks.length = 0
     removeErrorTask()
-    const AllLi = document.querySelectorAll("li")
-    AllLi.forEach(element => {
-        element.style.display = "none"
-    })
-})
+    const lists = document.querySelectorAll("li")
+    lists.forEach(list => list.style.display = "none")
+}
 
 let ul = document.querySelector("ul")
 
 function taskInList(task, list) {
-    if (list.indexOf(task) !== -1) {
-        return true
-    } else {
-        return false
-    }
+    list.indexOf(task) !== -1 ? true : false
 }
 
 function focusInputTask() {
-    taskType.focus()
+    task.focus()
 }
 
-const taskType = document.querySelector("#task-type")
-focusInputTask()
+const task = document.querySelector("#task-type")
+window.onload = () => focusInputTask()
 let messageError = document.createElement("p")
 
 function checkTask() {
-    if (taskType.value === "" || taskInList(taskType.value, listTasks)) {
+    if (task.value === "" || taskInList(task.value, listTasks)) {
         messageError.innerHTML = "<font color='#ff0000'>Tarefa inválida ou já cadastrada na lista</font>"
         form.appendChild(messageError)
     } else {
         removeErrorTask()
-        listTasks.push(taskType.value)
+        listTasks.push(task)
         focusInputTask()
         createTask()
     }
-    taskType.value = ""
+    task.value = ""
 
     function createTask() {
-        let itemTask = document.createElement("li")
-        let buttonDeleteTask = document.createElement("button")
-        let input = document.createElement("input")
-        input.setAttribute("type", "checkbox")
+        const itemTask = document.createElement("li")
+        const buttonDeleteTask = document.createElement("button")
+        const input = document.createElement("input")
+        input.type = "checkbox"
         buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
 
         itemTask.appendChild(input)
-        itemTask.appendChild(document.createTextNode(taskType.value))
+        itemTask.appendChild(document.createTextNode(task.value))
         itemTask.appendChild(buttonDeleteTask)
         ul.appendChild(itemTask)
 
-        input.addEventListener("change", () => {
+        input.onchange = () => {
             removeTask()
             itemTask.classList.toggle("done")
             focusInputTask()
-        })
+        }
 
-        buttonDeleteTask.addEventListener("click", () => {
+        buttonDeleteTask.onclick = () => {
             removeTask()
             itemTask.style.display = "none"
             focusInputTask()
-        })
+        }
 
         function removeTask() {
-            let removeTaskSpecific = listTasks.indexOf(itemTask.value)
+            const removeTaskSpecific = listTasks.indexOf(itemTask.value)
             listTasks.splice(removeTaskSpecific, 1)
         }
     }
