@@ -14,12 +14,21 @@ buttonClearAllTask.onclick = () => {
     removeErrorTask()
     const lists = document.querySelectorAll("li")
     lists.forEach(list => list.style.display = "none")
+    focusInputTask()
 }
 
 let ul = document.querySelector("ul")
 
 function taskInList(task, list) {
-    list.indexOf(task) !== -1 ? true : false
+    const taskLower = task.toLowerCase()
+    const taskIsNotInList = list.indexOf(taskLower) !== -1
+
+    if (taskIsNotInList) {
+        return true
+    } else {
+        list.push(taskLower)
+        return false
+    }
 }
 
 function focusInputTask() {
@@ -33,25 +42,26 @@ let messageError = document.createElement("p")
 function checkTask() {
     if (task.value === "" || taskInList(task.value, listTasks)) {
         messageError.innerHTML = "<font color='#ff0000'>Tarefa inválida ou já cadastrada na lista</font>"
-        form.appendChild(messageError)
     } else {
         removeErrorTask()
-        listTasks.push(task)
         focusInputTask()
         createTask()
     }
+
+    form.appendChild(messageError)
     task.value = ""
 
     function createTask() {
         const itemTask = document.createElement("li")
-        const buttonDeleteTask = document.createElement("button")
-        const input = document.createElement("input")
-        input.type = "checkbox"
-        buttonDeleteTask.innerHTML = "<i class='fas fa-trash icon-trash'></i>"
+        itemTask.innerHTML = `<input type='checkbox'>
+        ${task.value}
+        <button>
+            <i class='fas fa-trash icon-trash'></i>
+        </button>`
 
-        itemTask.appendChild(input)
-        itemTask.appendChild(document.createTextNode(task.value))
-        itemTask.appendChild(buttonDeleteTask)
+        const buttonDeleteTask = itemTask.querySelector("button")
+        const input = itemTask.querySelector("input")
+
         ul.appendChild(itemTask)
 
         input.onchange = () => {
@@ -69,6 +79,8 @@ function checkTask() {
         function removeTask() {
             const removeTaskSpecific = listTasks.indexOf(itemTask.value)
             listTasks.splice(removeTaskSpecific, 1)
+
+            if (listTasks.length === 0) focusInputTask()
         }
     }
 }
