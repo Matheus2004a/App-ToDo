@@ -20,7 +20,7 @@ buttonClearAllTask.onclick = () => {
 let ul = document.querySelector("ul")
 
 function taskInList(task, list) {
-    const taskLower = task.toLowerCase()
+    const taskLower = task.trim().toLowerCase()
     const taskIsNotInList = list.indexOf(taskLower) !== -1
 
     if (taskIsNotInList) {
