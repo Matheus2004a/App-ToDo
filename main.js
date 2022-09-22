@@ -17,7 +17,7 @@ buttonClearAllTask.onclick = () => {
     focusInputTask()
 }
 
-let ul = document.querySelector("ul")
+const ul = document.querySelector("ul")
 
 function taskInList(task, list) {
     const taskLower = task.trim().toLowerCase()
@@ -50,39 +50,40 @@ function checkTask() {
 
     form.appendChild(messageError)
     task.value = ""
+}
 
-    function createTask() {
-        const itemTask = document.createElement("li")
-        itemTask.innerHTML = `<input type='checkbox'>
-        ${task.value}
-        <button>
-            <i class='fas fa-trash icon-trash'></i>
-        </button>`
+function createTask() {
+    const itemTask = document.createElement("li")
+    itemTask.innerHTML = `<input type='checkbox'>
+    ${task.value}
+    <button>
+        <i class='fas fa-trash icon-trash'></i>
+    </button>`
 
-        const buttonDeleteTask = itemTask.querySelector("button")
-        const input = itemTask.querySelector("input")
+    const buttonDeleteTask = itemTask.querySelector("button")
+    const input = itemTask.querySelector("input")
 
-        ul.appendChild(itemTask)
+    ul.appendChild(itemTask)
 
-        input.onchange = () => {
-            removeTask()
-            itemTask.classList.toggle("done")
-            focusInputTask()
-        }
-
-        buttonDeleteTask.onclick = () => {
-            removeTask()
-            itemTask.style.display = "none"
-            focusInputTask()
-        }
-
-        function removeTask() {
-            const removeTaskSpecific = listTasks.indexOf(itemTask.value)
-            listTasks.splice(removeTaskSpecific, 1)
-
-            if (listTasks.length === 0) focusInputTask()
-        }
+    input.onchange = () => {
+        removeTask(itemTask)
+        itemTask.classList.toggle("done")
+        focusInputTask()
     }
+
+    buttonDeleteTask.onclick = () => {
+        removeTask(itemTask)
+        itemTask.style.display = "none"
+        focusInputTask()
+    }
+}
+
+function removeTask(task) {
+    const getTaskSpecific = listTasks.indexOf(task.value)
+    listTasks.splice(getTaskSpecific, 1)
+    
+    removeErrorTask()
+    if (listTasks.length === 0) focusInputTask()
 }
 
 function removeErrorTask() {
